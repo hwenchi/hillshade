@@ -37,7 +37,10 @@ const h = 0.001;
 
 @fragment
 fn fsMain(v: VSOutput) -> @location(0) vec4f {
-  // diffuse reflection
+  if (sample(v.texcoord, 0, 0) == 0.0) {
+    return vec4f(0.0);
+  }
+
   var N = normalize(vec3f(
     uniforms.exaggeration * (sample(v.texcoord, -h, 0) - sample(v.texcoord, h, 0)),
     uniforms.exaggeration * (sample(v.texcoord, 0, h) - sample(v.texcoord, 0, -h)),
@@ -50,10 +53,10 @@ fn fsMain(v: VSOutput) -> @location(0) vec4f {
   ));
   var d = dot(L, N);
 
-  // specular reflection
   var R = 2 * d * N - L;
   var V = vec3f(0, 0, 1);
   var s = dot(R, V);
 
-  return vec4f(uniforms.ambient + uniforms.diffuse * d + uniforms.specular * pow(s, 3));
+  let intensity = uniforms.ambient + uniforms.diffuse * d + uniforms.specular * pow(s, 3);
+  return vec4f(intensity, intensity, intensity, 1.0);
 }

@@ -13,7 +13,7 @@ async function main() {
   canvas.width = canvas.height = window.innerHeight;
 
   const presentationFormat = navigator.gpu.getPreferredCanvasFormat();
-  context.configure({ device, format: presentationFormat });
+  context.configure({ device, format: presentationFormat, alphaMode: "premultiplied" });
 
   const renderTarget = device.createTexture({
     size: [canvas.width, canvas.height],

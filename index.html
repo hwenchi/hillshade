@@ -1,41 +1,54 @@
 <head>
   <style>
-    label {
-      display: block;
-      width: 100px;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: #111; }
+    body {
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      gap: 24px;
       font-family: monospace;
+    }
+    #controls {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    label {
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: 90px;
+      flex-shrink: 0;
+    }
+    input[type=range] {
+      width: 140px;
+      accent-color: #fff;
+      cursor: pointer;
     }
   </style>
   <script type="module" src="hillshade.js"></script>
 </head>
-<body style="margin: 0">
-  <div style="display: flex; justify-content: center; gap: 20px">
-    <div style="display: flex; flex-direction: column; justify-content: center">
-      <div>
-        <label>exaggeration</label>
-        <input id="exaggeration" type="range" min="1" max="10" step="0.1" />
-      </div>
-      <div>
-        <label>ambient</label>
-        <input id="ambient" type="range" min="0" max="1" step="0.01" />
-      </div>
-      <div>
-        <label>diffuse</label>
-        <input id="diffuse" type="range" min="0" max="1" step="0.01" />
-      </div>
-      <div>
-        <label>specular</label>
-        <input id="specular" type="range" min="0" max="1" step="0.01" />
-      </div>
-      <div>
-        <label>phi</label>
-        <input id="phi" type="range" min="0" max="90" />
-      </div>
-      <div>
-        <label>theta</label>
-        <input id="theta" type="range" min="0" max="360" />
-      </div>
-    </div>
-    <canvas id="hillshade"></canvas>
+<body>
+  <div id="controls">
+    <div class="row"><label>exaggeration</label><input id="exaggeration" type="range" min="1" max="10" step="0.1" /></div>
+    <div class="row"><label>ambient</label><input id="ambient" type="range" min="0" max="1" step="0.01" /></div>
+    <div class="row"><label>diffuse</label><input id="diffuse" type="range" min="0" max="1" step="0.01" /></div>
+    <div class="row"><label>specular</label><input id="specular" type="range" min="0" max="1" step="0.01" /></div>
+    <div class="row"><label>phi</label><input id="phi" type="range" min="0" max="90" /></div>
+    <div class="row"><label>theta</label><input id="theta" type="range" min="0" max="360" /></div>
   </div>
+  <canvas id="hillshade"></canvas>
 </body>
