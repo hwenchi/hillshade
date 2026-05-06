@@ -30,7 +30,7 @@ struct Uniforms {
 @group(0) @binding(2) var<uniform> uniforms: Uniforms;
 
 fn sample(texcoord: vec2f, dx: f32, dy: f32) -> f32 {
-  return textureSample(uTexture, uSampler, texcoord + vec2f(dx, dy)).r;
+  return textureSampleLevel(uTexture, uSampler, texcoord + vec2f(dx, dy), 0.0).r;
 }
 
 const h = 0.001;
