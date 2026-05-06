@@ -16,10 +16,10 @@ The DEM is uploaded as a texture. The fragment shader samples neighboring texels
 
 ### Neighbor sampling in texture space
 
-In the fragment shader, the finite difference stencil samples the DEM at neighboring coordinates:
+In the CPU version, the stencil is expressed directly in pixel indices:
 
 ```math
 \vec{n}[i,j] = \Bigl(f[i,j-1] - f[i,j+1],\; f[i+1,j] - f[i-1,j],\; 2\Bigr)^\top
 ```
 
-But the shader operates in texture coordinates $`(u, v) \in [0, 1]^2`$, not pixel indices. Sampling one texel away requires a step of $`h = 1 / \text{demSize}`$ in texture space. Furthermore, the height values in the DEM are in elevation units while the horizontal step corresponds to a geographic distance — the two axes are on different scales. The `exaggeration` uniform scales the height axis to bring the normal into a visually meaningful range.
+In the fragment shader, the stencil must be expressed in texture coordinates $`(u, v) \in [0,1]^2`$ rather than pixel indices. A one-pixel offset translates to a step of $`1/\text{demSize}`$ in texture space, so sampling the neighbor one texel to the right means evaluating at $`(u + 1/\text{demSize},\; v)`$. Furthermore, the height values are in elevation units while the horizontal step corresponds to geographic distance — the two axes are on different scales. The `exaggeration` uniform scales the height axis to bring the normal into a visually meaningful range.
