@@ -10,7 +10,7 @@ This project continues from [shortcut-to-graphics](https://github.com/GalMunGral
 
 ### Strategy
 
-The DEM is uploaded as a texture. The fragment shader samples neighboring texels to estimate the surface normal by central finite differences, then evaluates the Phong lighting equation. The math is unchanged from the CPU version; only the execution model differs. Interactive sliders expose the light direction (azimuth and elevation angle), vertical exaggeration, and the three Phong coefficients.
+The same hillshading computation from the CPU version — normal estimation by finite differences and Phong shading — is reimplemented as a WebGPU fragment shader. The math is unchanged; only the execution model differs. Interactive sliders expose the light direction, vertical exaggeration, and the three Phong coefficients.
 
 ## Technical Challenges
 
