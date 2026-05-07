@@ -57,6 +57,7 @@ fn fsMain(v: VSOutput) -> @location(0) vec4f {
   var V = vec3f(0, 0, 1);
   var s = dot(R, V);
 
-  let intensity = uniforms.ambient + uniforms.diffuse * d + uniforms.specular * pow(s, 3);
-  return vec4f(intensity, intensity, intensity, 1.0);
+  let material = 0.133; // #222
+  let c = (uniforms.ambient + uniforms.diffuse * max(d, 0.0)) * material + uniforms.specular * pow(max(s, 0.0), 3.0);
+  return vec4f(c, c, c, 1.0);
 }
