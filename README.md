@@ -1,12 +1,12 @@
 # WebGPU Hillshade Renderer
 
-**Live demo:** https://galmungral.github.io/hillshade/
+**Live demo:** https://hwenchi.github.io/hillshade/
 
 ## Rhetorical Design
 
 ### Purpose
 
-This project continues from [shortcut-to-graphics](https://github.com/GalMunGral/shortcut-to-graphics), which implements Phong shading over a LiDAR DEM in Python. The initial implementation uses an explicit pixel loop, which is slow. Annotating the render loop with Numba's `@njit(parallel=True)` recovers performance through CPU parallelization — but the computation is embarrassingly parallel at the pixel level, and the natural endpoint of that observation is the GPU. This project reimplements the same hillshading computation as a WebGPU fragment shader, where every pixel executes simultaneously.
+This project continues from [shortcut-to-graphics](https://github.com/hwenchi/shortcut-to-graphics), which implements Phong shading over a LiDAR DEM in Python. The initial implementation uses an explicit pixel loop, which is slow. Annotating the render loop with Numba's `@njit(parallel=True)` recovers performance through CPU parallelization — but the computation is embarrassingly parallel at the pixel level, and the natural endpoint of that observation is the GPU. This project reimplements the same hillshading computation as a WebGPU fragment shader, where every pixel executes simultaneously.
 
 ### Strategy
 
